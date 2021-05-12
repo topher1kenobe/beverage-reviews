@@ -64,7 +64,14 @@ class Beverage_CPT {
 
 		register_extended_post_type( 'beverage' );
 
-		register_extended_taxonomy( 'vendor', 'beverage' );
+		register_extended_taxonomy( 'beverage-vendor', 'beverage', array(), array(
+
+			# Override the base names used for labels:
+			'singular' => 'Beverage Vendor',
+			'plural'   => 'Beverage Vendors',
+			'slug'     => 'beverage-vendors'
+
+		) );
 
 		register_extended_taxonomy( 'beverage-tags', 'beverage', array(
 

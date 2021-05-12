@@ -49,89 +49,90 @@ class Beverage_Meta {
 	 */
 	public function setup() {
 
-		add_filter( 'rwmb_meta_boxes', [ $this, 'beverage_meta' ], 1 );
+		add_filter( 'cmb2_admin_init', [ $this, 'beverage_meta' ], 1 );
+
+		add_filter( 'cmb2_admin_init', [ $this, 'vendor_meta' ], 1 );
 
 	}
 
 	/*
-	 * Register the meta box and fields
+	 * Register the beverage meta box and fields
 	 *
 	 * @access public
 	 * @return string $output
 	 */
-	public function beverage_meta( $meta_boxes ) {
+	public function beverage_meta() {
 
 		$prefix = 'beverage_';
 
-		$meta_boxes[] = [
-			'title'      => esc_html__( 'Beverage Information', 'beverage-reviews' ),
-			'id'         => 'beverage_links',
-			'post_types' => [ 'beverage' ],
+		$beverage_meta = new_cmb2_box( array(
+			'id'            => 'beverage_links',
+			'title'         => esc_html__( 'Beverage Information', 'beverage-reviews' ),
+			'object_types'  => [ 'beverage' ], // Post type
 			'context'    => 'normal',
 			'priority'   => 'high',
-			'autosave'   => true,
-			'fields'     => [
-				[
-					'type' => 'text',
-					'id'   => $prefix . 'link',
-					'name' => esc_html__( 'More Information (URL)', 'beverage-reviews' ),
-				],
-				[
-					'type' => 'text',
-					'id'   => $prefix . 'batch',
-					'name' => esc_html__( 'Batch', 'beverage-reviews' ),
-				],
-				[
-					'type' => 'text',
-					'id'   => $prefix . 'currency',
-					'std'  => '$',
-					'name' => esc_html__( 'Currency', 'beverage-reviews' ),
-					'size' => 1,
-				],
-				[
-					'type' => 'text',
-					'id'   => $prefix . 'price',
-					'name' => esc_html__( 'Average Price', 'beverage-reviews' ),
-					'size' => 5,
-				],
-				[
-					'id'   => $prefix . 'rating',
-					'type' => 'rating',
-					'name' => esc_html__( 'Rating', 'beverage-reviews' ),
-					'std'  => 0,
-				],
-			],
-		];
+		) );
 
-		return $meta_boxes;
+		$beverage_meta->add_field( array(
+			'name'       => esc_html__( 'More Information (URL)', 'beverage-reviews' ),
+			'id'         => $prefix . 'link',
+			'type'       => 'text_url',
+		) );
+
+		$beverage_meta->add_field( array(
+			'name'       => esc_html__( 'Year', 'beverage-reviews' ),
+			'id'         => $prefix . 'year',
+			'type'       => 'text_small',
+		) );
+
+		$beverage_meta->add_field( array(
+			'name'       => esc_html__( 'Batch', 'beverage-reviews' ),
+			'id'         => $prefix . 'batch',
+			'type'       => 'text_medium',
+		) );
+
+		$beverage_meta->add_field( array(
+			'name'       => esc_html__( 'Currency', 'beverage-reviews' ),
+			'id'         => $prefix . 'currency',
+			'default'    => '$',
+			'type'       => 'text_small',
+		) );
+
+		$beverage_meta->add_field( array(
+			'name'       => esc_html__( 'Price', 'beverage-reviews' ),
+			'id'         => $prefix . 'price',
+			'type'       => 'text_small',
+		) );
+
+		$beverage_meta->add_field( array(
+			'name'       => esc_html__( 'Rating', 'beverage-reviews' ),
+			'id'         => $prefix . 'rating',
+			'type'       => 'star_rating',
+		) );
 
 	}
 
-	public static function register_required_plugins() {
+	public function vendor_meta( $meta_boxes ) {
 
-		$plugins = array(
-			array(
-				'name'     => 'Meta Box',
-				'slug'     => 'meta-box',
-				'required' => true,
-			),
-			array(
-				'name'     => 'WP jQuery DataTable',
-				'slug'     => 'wp-jquery-datatable',
-				'required' => true,
-			),
-			array(
-				'name'     => 'Meta Box Ratings Field',
-				'slug'     => 'mb-rating-field-main',
-				'required' => true,
-				'source'   => 'https://github.com/wpmetabox/mb-rating-field/archive/refs/heads/main.zip',
-			),
-			// More plugins
-		);
-		$config  = array(
-			'id' => 'beverage-reviews',
-		);
-		tgmpa( $plugins, $config );
+		$prefix = 'beverage_vendor_';
+
+		/**
+		 * Metabox to add fields to categories and tags
+		 */
+		$cmb_term = new_cmb2_box( array(
+			'id'               => $prefix . 'term_meta',
+			'title'            => esc_html__( 'Vendor Information', 'beverage-reviews' ), // Doesn't output for term boxes
+			'object_types'     => array( 'term' ), // Tells CMB2 to use term_meta vs post_meta
+			'taxonomies'       => array( 'beverage-vendor' ), // Tells CMB2 which taxonomies should have these fields
+			'new_term_section' => true, // Will display in the "Add New Category" section
+		) );
+
+		$cmb_term->add_field( array(
+			'name'     => esc_html__( 'URL', 'beverage-reviews' ),
+			'id'       => $prefix  . 'link',
+			'type'     => 'text_url',
+		) );
+
 	}
 
 }

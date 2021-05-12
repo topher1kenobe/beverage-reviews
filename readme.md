@@ -7,7 +7,7 @@ Allows site owners to create beverage reviews
 **Tags:** [](http://wordpress.org/plugins/tags/)  
 **Requires at least:** 5.5  
 **Tested up to:** 5.7.1  
-**Stable tag:** 1.0  
+**Stable tag:** 2.0  
 **License:** [GPLv2 or later](http://www.gnu.org/licenses/gpl-2.0.html)  
 
 ## Description ##
@@ -29,6 +29,11 @@ This section describes how to install the plugin and get it working.
 Create reviews under the Beverages post type, and then place the `[beverage_table]` shortcode into any page or post.
 
 ## Changelog ##
+
+### 2.0 ###
+* Switch from MetaBox to CMB2 for Meta data
+* Add URL term meta to Vendors
+* Better name Vendor taxonomy
 
 ### 1.0 ###
 * Initial release.

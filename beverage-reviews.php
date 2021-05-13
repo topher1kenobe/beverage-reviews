@@ -85,7 +85,7 @@ if ( file_exists( plugin_dir_path( __FILE__ ) . 'classes/class-beverage-meta.php
  *
  * @since Beverage_Meta 1.0
  */
-if ( file_exists( plugin_dir_path( __FILE__ ) . 'classes/table-shortcode.php' ) ) {
-	include_once plugin_dir_path( __FILE__ ) . 'classes/table-shortcode.php';
+if ( file_exists( plugin_dir_path( __FILE__ ) . 'classes/class-beverage-table-shortcode.php' ) ) {
+	include_once plugin_dir_path( __FILE__ ) . 'classes/class-beverage-table-shortcode.php';
 	add_action( 'init', array( 'Beverage_Table_Shortcode', 'instance' ) );
 }

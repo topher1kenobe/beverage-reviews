@@ -11,7 +11,7 @@ License: GPLv3+
 License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
 
 @package beverage-reviews
- **/
+ */
 
 /**
  * Require requirement plugin
@@ -65,8 +65,8 @@ add_action( 'plugins_loaded', 'br_load_text_domain' );
  *
  * @since Beverage_CPT 1.0
  */
-if ( file_exists( plugin_dir_path( __FILE__ ) . 'classes/cpt.php' ) ) {
-	include_once plugin_dir_path( __FILE__ ) . 'classes/cpt.php';
+if ( file_exists( plugin_dir_path( __FILE__ ) . 'classes/class-beverage-cpt.php' ) ) {
+	include_once plugin_dir_path( __FILE__ ) . 'classes/class-beverage-cpt.php';
 	add_action( 'init', array( 'Beverage_CPT', 'instance' ) );
 }
 

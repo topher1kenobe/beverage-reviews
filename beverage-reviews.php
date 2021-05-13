@@ -1,5 +1,5 @@
 <?php
-/*
+/**
 Plugin Name: Beverage Reviews
 Description: Allows you to enter beverages and rate them
 Version: 2.0
@@ -9,7 +9,9 @@ Text Domain: beverage-reviews
 Domain Path: /languages/
 License: GPLv3+
 License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
-*/
+
+@package beverage-reviews
+ **/
 
 /**
  * Require requirement plugin
@@ -17,8 +19,8 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
  * @since Beverage_CPT 1.0
  */
 if ( file_exists( plugin_dir_path( __FILE__ ) . 'classes/class-tgm-plugin-activation.php' ) ) {
-    include_once plugin_dir_path( __FILE__ ) . 'classes/class-tgm-plugin-activation.php';
-    add_action( 'tgmpa_register', 'Beverage_Table_Shortcode::register_required_plugins' );
+	include_once plugin_dir_path( __FILE__ ) . 'classes/class-tgm-plugin-activation.php';
+	add_action( 'tgmpa_register', 'Beverage_Table_Shortcode::register_required_plugins' );
 }
 
 /**
@@ -27,7 +29,7 @@ if ( file_exists( plugin_dir_path( __FILE__ ) . 'classes/class-tgm-plugin-activa
  * @since Beverage_CPT 1.0
  */
 if ( file_exists( plugin_dir_path( __FILE__ ) . 'vendors/extended-cpts/extended-cpts.php' ) ) {
-    include_once plugin_dir_path( __FILE__ ) . 'vendors/extended-cpts/extended-cpts.php';
+	include_once plugin_dir_path( __FILE__ ) . 'vendors/extended-cpts/extended-cpts.php';
 }
 
 /**

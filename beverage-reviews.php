@@ -75,8 +75,8 @@ if ( file_exists( plugin_dir_path( __FILE__ ) . 'classes/class-beverage-cpt.php'
  *
  * @since Beverage_Meta 1.0
  */
-if ( file_exists( plugin_dir_path( __FILE__ ) . 'classes/meta.php' ) ) {
-	include_once plugin_dir_path( __FILE__ ) . 'classes/meta.php';
+if ( file_exists( plugin_dir_path( __FILE__ ) . 'classes/class-beverage-meta.php' ) ) {
+	include_once plugin_dir_path( __FILE__ ) . 'classes/class-beverage-meta.php';
 	add_action( 'init', array( 'Beverage_Meta', 'instance' ) );
 }
 

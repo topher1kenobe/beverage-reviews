@@ -72,7 +72,11 @@ class Beverage_CPT {
 	 */
 	public function beverage_cpt() {
 
-		register_extended_post_type( 'beverage' );
+		register_extended_post_type( 'beverage',
+			array(
+				'show_in_rest' => true,
+			)
+		);
 
 		register_extended_taxonomy(
 			'beverage-vendor',

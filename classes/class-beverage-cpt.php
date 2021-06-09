@@ -81,7 +81,9 @@ class Beverage_CPT {
 		register_extended_taxonomy(
 			'beverage-vendor',
 			'beverage',
-			array(),
+			array(
+				'show_in_rest' => true,
+			),
 			array(
 
 				// Override the base names used for labels.

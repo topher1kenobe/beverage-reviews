@@ -91,7 +91,35 @@ class Beverage_Table_Shortcode {
 				$output .= ob_get_contents();
 			ob_end_clean();
 
-			include_once 'template-parts/beverage-table-start.php';
+
+			$output .= '<style>' . "\n";
+			$output .= '#beverage-table th { text-align: left; }' . "\n";
+			$output .= '</style>' . "\n\n";
+
+			$output .= '<table border="0" id="beverage-table">' . "\n";
+			$output .= '<thead>' . "\n";
+			$output .= '<tr>' . "\n";
+			$output .= '<th>Info</th>' . "\n";
+			$output .= '<th>Label</th>' . "\n";
+			$output .= '<th>Distillery</th>' . "\n";
+			$output .= '<th>Cost</th>' . "\n";
+			$output .= '<th>Rating</th>' . "\n";
+			$output .= '<th>Tags</th>' . "\n";
+			$output .= '</tr>' . "\n";
+			$output .= '</thead>' . "\n\n";
+
+			$output .= '<tfoot>' . "\n";
+			$output .= '<tr>' . "\n";
+			$output .= '<th>Info</th>' . "\n";
+			$output .= '<th>Label</th>' . "\n";
+			$output .= '<th>Distillery</th>' . "\n";
+			$output .= '<th>Cost</th>' . "\n";
+			$output .= '<th>Rating</th>' . "\n";
+			$output .= '<th>Tags</th>' . "\n";
+			$output .= '</tr>' . "\n";
+			$output .= '</tfoot>' . "\n\n";
+
+			$output .= '<tbody>' . "\n\n";
 
 			while ( $the_query->have_posts() ) :
 				$the_query->the_post();
@@ -101,18 +129,43 @@ class Beverage_Table_Shortcode {
 				$tags          = implode( ', ', wp_list_pluck( $tags_array, 'name' ) );
 
 				$output .= '<tr>' . "\n";
-				$output .= '<td nowrap><a href=""><span class="dashicons dashicons-info-outline"></span> <span class="hidden">Info</span></a></td>' . "\n";
+				$output .= '<td nowrap><a href="#TB_inline?&width=600&height=550&inlineId=beverage-' . get_the_ID() . '" class="thickbox"><span class="dashicons dashicons-info-outline"></span> <span class="hidden">Info</span></a></td>' . "\n";
 				$output .= '<td><a href="' . esc_url( get_post_meta( get_the_ID(), 'beverage_link', true ) ) . '">' . get_the_title() . '</a></td>' . "\n";
 				$output .= '<td><a href="' . esc_url( get_term_meta( $vendors_array[0]->term_id, 'beverage_vendor_link', true ) ) . '">' . esc_html( $vendors_array[0]->name ) . '</a></td>' . "\n";
 				$output .= '<td>' . esc_html( get_post_meta( get_the_ID(), 'beverage_currency', true ) . get_post_meta( get_the_ID(), 'beverage_price', true ) ) . '</td>' . "\n";
 				$output .= '<td nowrap>' . eh_cmb2_get_star_rating_field( 'beverage_rating', get_the_ID() ) . '</td>' . "\n";
-				$output .= '<td>' . esc_html( $tags ) . '</td>' . "\n";
+				$output .= '<td>';
+
+				$output .= '<div id="beverage-' . get_the_ID() . '" style="display:none;">';
+     			$output .= '<div>';
+
+
+          		$output .= '<h3>' . get_the_title() . '</h3>';
+
+          		$output .= get_the_post_thumbnail( get_the_id(), array( 100, 500 ), array( 'class' => 'alignright' ) );
+
+          		$output .= get_the_content();
+
+          		$output .= '<h4>' . __( 'More Information', 'beverage-reviews' ) . '</h4>';
+
+          		$output .= '<ul>';
+                $output .= '<li><a href="' . esc_url( get_post_meta( get_the_ID(), 'beverage_link', true ) ) . '">' . get_the_title() . '</a></li>' . "\n";
+                $output .= '<li>' . __( 'Manufacturer', 'beverage-reviews' ) . ': <a href="' . esc_url( get_term_meta( $vendors_array[0]->term_id, 'beverage_vendor_link', true ) ) . '">' . esc_html( $vendors_array[0]->name ) . '</a></li>' . "\n";
+          		$output .= '</ul>';
+
+     			$output .= '</div>';
+				$output .= '</div>';
+
+
+ 				$output .= esc_html( $tags );
+ 				$output .= '</td>' . "\n";
 				$output .= '</tr>' . "\n";
 
 			endwhile;
 
-				$output .= '</tbody>' . "\n";
-				$output .= '</table>' . "\n";
+
+			$output .= '</tbody>' . "\n";
+			$output .= '</table>' . "\n\n";
 
 			wp_reset_postdata();
 		}

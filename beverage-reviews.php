@@ -14,6 +14,16 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
  */
 
 /**
+ * Add Thickbox support
+ *
+ * @since Beverage_CPT 2.0
+ */
+function beverage_add_thickbox() {
+	add_thickbox();
+}
+add_action( 'init', 'beverage_add_thickbox' );
+
+/**
  * Require requirement plugin
  *
  * @since Beverage_CPT 1.0

@@ -99,6 +99,7 @@ class Beverage_CPT {
 
 				// Use radio buttons in the meta box for this taxonomy on the post editing screen.
 				'hierarchical' => false,
+				'show_in_rest' => true,
 
 			),
 			array(

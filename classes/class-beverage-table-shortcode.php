@@ -61,6 +61,8 @@ class Beverage_Table_Shortcode {
 
 		add_shortcode( 'beverage_table', array( $this, 'beverage_table_shortcode' ) );
 
+		wp_enqueue_style( 'beverage-reviews', plugin_dir_url( __DIR__ ) . 'css/beverage-reviews.css' );
+
 	}
 
 	/**

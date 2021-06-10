@@ -1,0 +1,7 @@
+#beverage-table tbody tr:nth-child(odd) {
+    background-color: #eaf9ff;
+}
+
+#beverage-table tbody tr:hover {
+    background-color: #d4f4ff;
+}
